@@ -57,14 +57,14 @@ syn match   lcComponent   '\/[^[:space:](]\+'ms=s+1
 " 06-09 10:42:06.729 I/        ( 1484): Message with empty component
 "                    ^^^^^^^^^^
 syn match   lcTag         '\w\/[^(]*\s*'
-                                \ nextgroup=lcThread contains=lcTagError,lcPriority,lcComponent,myTags
+                                \ nextgroup=lcThread contains=lcTagError,lcTagFatal,lcPriority,lcComponent,myTags
 
 " 06-08 16:17:55.183 18677 20835 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE
 "                                 ^^^^^^^^^^^^
 " 06-08 16:17:55.183 18677 20835 D         : ACDBFILE_MGR:Read the devices count as zero, please check the acdb file
 "                                 ^^^^^^^^^
 syn match   lcTag2        '\w [^:]*\s*:'
-                                \ nextgroup=lcMsgBody contains=lcPriority,lcTagError,myTags
+                                \ nextgroup=lcMsgBody contains=lcPriority,lcTagError,lcTagFatal,myTags
 
 " Must come after lcPriority and lcTag2 so it has higher match priority
 syn match   lcTagError    'E\/[[:alnum:]_-]\+'
@@ -72,7 +72,17 @@ syn match   lcTagError    'E\/[[:alnum:]_-]\+'
 
 " Example:
 " 06-08 16:17:56.101   566   566 E NEW_BHD : Open /sys/class/power_supply/gb_battery
+" syn match   lcTagError2   'E [^:]\+:'
+"                                 \ nextgroup=lcMsgBody
+"
 syn match   lcTagError2   'E [^:]\+:'
+                                \ nextgroup=lcMsgBody
+
+syn match   lcTagFatal    'F\/[[:alnum:]_-]\+'
+                                \ containedin=lcTag
+
+" Added myself
+syn match   lcTagFatal2   'F [^:]\+:'
                                 \ nextgroup=lcMsgBody
 
 " Example:
@@ -84,7 +94,7 @@ syn match   lcThread      '(\s*\d\+):'he=e-1
 " 06-08 16:17:55.183 18677 20835 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE
 "                    ^^^^^^^^^^^^
 syn match   lcThread2     '\s*\d\+\s\+\d\+ '
-                                \ nextgroup=lcTag2,lcTagError2 contains=lcNumber
+                                \ nextgroup=lcTag2,lcTagError2,lcTagFatal2 contains=lcNumber
 
 " Example:
 " 06-09 10:42:06.729 I/chatty  ( 1484): uid=1000(system) Binder:1484_5 expire 1 line
@@ -101,8 +111,10 @@ hi def link lcMonotonic   SpecialComment
 hi def link lcTag         Statement
 hi def link lcTag2        Statement
 hi def link lcPriority    Identifier
-hi def link lcTagError    Error
-hi def link lcTagError2   Error
+" hi def link lcTagError    Error
+" hi def link lcTagError2   Error
+hi def link lcTagFatal    Fatal
+hi def link lcTagFatal2   Fatal
 hi def link lcComponent   Normal
 
 hi def link lcThread      Special
