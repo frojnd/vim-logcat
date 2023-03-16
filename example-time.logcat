@@ -26,3 +26,4 @@
 06-09 14:25:33.852 V/MultiHal( 1484): writerTask poll() got 2 events.
 06-09 14:25:33.852 V/MultiHal( 1484): writerTask wrote 2 events
 06-09 10:43:24.853 F/ActivityThread( 5001): 	Fatal message here ...(ContextImpl.java:1476)
+02-03 12:59:38.829   670   670 F PackageManager: Considering granting permission android.permission.ACCESS_LOCATION_EXTRA_COMMANDS to package com.android.shell(2000)
