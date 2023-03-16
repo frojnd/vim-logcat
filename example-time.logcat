@@ -25,3 +25,4 @@
 06-09 14:23:33.688 E/WifiHAL ( 1484): nl80211: requestResponse->nl_recvmsgs success. 1
 06-09 14:25:33.852 V/MultiHal( 1484): writerTask poll() got 2 events.
 06-09 14:25:33.852 V/MultiHal( 1484): writerTask wrote 2 events
+06-09 10:43:24.853 F/ActivityThread( 5001): 	Fatal message here ...(ContextImpl.java:1476)
